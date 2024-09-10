@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     # local
     'blog.apps.BlogConfig',
     'dashboard.apps.DashboardConfig',
+    'users.apps.UsersConfig',
+
 
     # 3erd party PKGs
     "crispy_forms",
