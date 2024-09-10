@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ post.title }}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- Post Section -->
+            <div class="post mb-4">
+                <h1 class="mb-3">{{ post.title }}</h1>
+                <p class="meta-title text-muted">{{ post.meta_title }}</p>
+                <p class="owner">By: <strong>{{ post.owner.username }}</strong></p>
+                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid mb-3">
+                <p class="publish-date text-muted">Published on: {{ post.publish_date }}</p>
+                <div class="body mb-4">
+                    {{ post.body|linebreaks }}
+                </div>
+                <p class="summary">{{ post.summary }}</p>
+
+                <!-- Categories -->
+                <h5 class="mt-4">Categories</h5>
+                <ul class="list-inline">
+                    {% for category in post.categories.all %}
+                        <li class="list-inline-item badge bg-primary">
+                            <a  href="{% url 'blog:home' %}?category={{ category.title }}">
+                                {{ category.title }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <!-- Tags -->
+                <h5 class="mt-4">Tags</h5>
+                <ul class="list-inline">
+                    {% for tag in post.tags.all %}
+                        <li class="list-inline-item badge bg-secondary">
+                            <a href="{% url 'blog:home' %}?tag={{ tag.title }}">
+                                {{ tag.title }}
+                            </a>                            
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="comments mb-4">
+                <h3>Comments</h3>
+                <ul class="list-group mb-4">
+                    {% for comment in post.comment_set.all %}
+                        <li class="list-group-item">
+                            <strong>{{ comment.owner.username }}</strong>: {{ comment.body }}
+                            <p class="text-muted small">Posted on: {{ comment.created_at }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% if user.is_authenticated %}
+            {% load crispy_forms_tags %}
+            <!-- Comment Form -->
+            <div class="comment-form">
+                <h3>Add a Comment</h3>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        {{ comment_form| crispy}}
+
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Comment</button>
+                </form>
+            </div>
+                
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
