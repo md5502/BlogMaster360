@@ -39,7 +39,7 @@ def create_post(request):
 
 @login_required(login_url='/accounts/login')
 def delete_post(request, slug):
-    post = get_object_or_404(Post, slog = slug)
+    post = get_object_or_404(Post, slug = slug)
     if request.method == "POST":
         if request.user == post.owner:
             messages.success(request, "the post deleted successfully")
@@ -50,7 +50,7 @@ def delete_post(request, slug):
 @login_required(login_url='/accounts/login')
 def update_post(request, slug):
     
-    post = get_object_or_404(Post, slog = slug)
+    post = get_object_or_404(Post, slug = slug)
     if request.user == post.owner:
         if request.method == "POST":
             form = PostForm(request.POST, request.FILES, instance=post)
