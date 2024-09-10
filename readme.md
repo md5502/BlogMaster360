@@ -64,7 +64,7 @@ This project is a Django-based web application that includes a blog and user das
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/md5502/django-blog-dashboard.git
+   git clone https://github.com/md5502/BlogMaster360
    ```
 
 2. Install dependencies:
