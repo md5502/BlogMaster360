@@ -40,6 +40,12 @@ INSTALLED_APPS = [
 
     # local
     'blog.apps.BlogConfig',
+    'dashboard.apps.DashboardConfig',
+
+    # 3erd party PKGs
+    "crispy_forms",
+    'crispy_bootstrap5',
+
 ]
 
 MIDDLEWARE = [
