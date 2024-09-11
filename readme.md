@@ -70,6 +70,8 @@ This project is a Django-based web application that includes a blog and user das
 2. Install dependencies:
 
    ```bash
+   python -m venv .env
+   source ./.env/bin/activate
    pip install -r requirements.txt
    ```
 
